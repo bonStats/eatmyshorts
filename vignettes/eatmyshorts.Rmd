@@ -1,0 +1,67 @@
+---
+title: "eatmyshorts"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{eatmyshorts}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(eatmyshorts)
+library(BART)
+```
+
+## Boston Housing example (from `BART` vignette)
+
+
+```{r boston}
+
+library(dplyr)
+library(ggplot2)
+library(BART)
+library(tidybayes)
+library(tidytreatment)
+
+Boston <- MASS::Boston
+
+X <- Boston[, c(6, 13)]
+y <- Boston$medv
+
+bart_model <- wbart(x.train = X, 
+                  y.train = y, 
+                  nskip = 1000, 
+                  ndpost = 1000,
+                  nkeeptreedraws = 2)
+
+# # tidy version of fitted draws
+# bart_post_fit <- fitted_draws(bart_fit, newdata = X, value = "yhat") %>% 
+#   left_join(tibble(y = y, .row = 1:length(y)))
+# 
+# bart_post_fit %>% ggplot() + geom_ribbon(aes(y = yhat, x = y))
+
+tt1 <- posterior_trees(bart_model)
+tt2 <- posterior_trees(bart_model)
+
+
+
+ttt1 <- tt1$trees %>% mutate(unique_tree_id = cumsum(is.na(var) & is.na(cut) & is.na(leaf)))
+
+tail(ttt1)
+
+ttt2 <- tt2$trees %>% mutate(
+  unique_tree_id = cumsum(is.na(var) & is.na(cut) & is.na(leaf)),
+  iter = (unique_tree_id - 1L) %/% 200L + 1L,
+  tree_id = (unique_tree_id - 1L) %% 200L + 1L
+  ) %>% filter(stats::complete.cases(.))
+
+```
+
+

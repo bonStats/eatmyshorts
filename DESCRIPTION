@@ -1,0 +1,19 @@
+Package: eatmyshorts
+Type: Package
+Title: Visualisation for BART models
+Version: 0.1.0
+Authors@R: person("Joshua J", "Bon", email = "joshuajbon@gmail.com", role = c("aut", "cre"))
+Description: Visualisation methods and functions for exploring Bayesian Additive Regression Trees
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown,
+    tidybayes,
+    tidytreatment,
+    ggplot2,
+    dplyr
+Depends: BART, readr
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1
