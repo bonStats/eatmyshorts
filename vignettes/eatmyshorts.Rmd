@@ -51,17 +51,6 @@ tt1 <- posterior_trees(bart_model)
 tt2 <- posterior_trees(bart_model)
 
 
-
-ttt1 <- tt1$trees %>% mutate(unique_tree_id = cumsum(is.na(var) & is.na(cut) & is.na(leaf)))
-
-tail(ttt1)
-
-ttt2 <- tt2$trees %>% mutate(
-  unique_tree_id = cumsum(is.na(var) & is.na(cut) & is.na(leaf)),
-  iter = (unique_tree_id - 1L) %/% 200L + 1L,
-  tree_id = (unique_tree_id - 1L) %% 200L + 1L
-  ) %>% filter(stats::complete.cases(.))
-
 ```
 
 

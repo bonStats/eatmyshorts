@@ -2,7 +2,7 @@
 % Please edit documentation in R/BART-graph.R
 \name{posterior_trees}
 \alias{posterior_trees}
-\title{Get posterior tree draws into XXX format}
+\title{Get posterior tree draws into tibble format}
 \usage{
 posterior_trees(model)
 }
@@ -10,8 +10,8 @@ posterior_trees(model)
 \item{model}{BART model}
 }
 \value{
-List of XXX objects.
+A tibble
 }
 \description{
-Get posterior tree draws into XXX format
+Tibble grouped by iteration (\code{iter}) and tree id (\code{tree_id}).
 }

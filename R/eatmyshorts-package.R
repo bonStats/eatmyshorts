@@ -5,5 +5,6 @@
 #' @docType package
 #' @name eatmyshorts
 #' @importFrom readr read_table
+#' @import BART
 #'
 NULL
