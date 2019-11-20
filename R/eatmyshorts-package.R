@@ -5,6 +5,8 @@
 #' @docType package
 #' @name eatmyshorts
 #' @importFrom readr read_table
+#' @importFrom purrr map_df
+#' @import dplyr
 #' @import BART
 #'
 NULL

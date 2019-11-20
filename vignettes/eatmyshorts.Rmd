@@ -39,16 +39,11 @@ bart_model <- wbart(x.train = X,
                   y.train = y, 
                   nskip = 1000, 
                   ndpost = 1000,
-                  nkeeptreedraws = 2)
+                  nkeeptreedraws = 2) # only 2 trees
 
-# # tidy version of fitted draws
-# bart_post_fit <- fitted_draws(bart_fit, newdata = X, value = "yhat") %>% 
-#   left_join(tibble(y = y, .row = 1:length(y)))
-# 
-# bart_post_fit %>% ggplot() + geom_ribbon(aes(y = yhat, x = y))
+trees <- get_posterior_trees(bart_model)
 
-tt1 <- posterior_trees(bart_model)
-tt2 <- posterior_trees(bart_model)
+trees$trees %>% select(node, parent, label)
 
 
 ```

@@ -13,8 +13,7 @@ Suggests:
     tidybayes,
     tidytreatment,
     ggplot2,
-    dplyr,
     MASS
-Depends: BART, readr
+Depends: BART, dplyr, readr, purrr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
