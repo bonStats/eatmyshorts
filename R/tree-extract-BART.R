@@ -112,7 +112,7 @@ posterior_trees_BART <- function(model, label_digits){
     label = ifelse(
       is_leaf,
       as.character(round(leaf_value, digits = label_digits)),
-      paste(var, ">", round(cut, digits = label_digits))
+      paste(var, "<", round(cut, digits = label_digits))
       ),
     parent = parent(node)
     )

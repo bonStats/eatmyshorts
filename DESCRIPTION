@@ -12,7 +12,8 @@ Suggests:
     rmarkdown,
     ggplot2,
     MASS,
-    tidytree
-Depends: BART, dplyr, readr, purrr
+    tidytree,
+    ggraph
+Depends: BART, dplyr, readr, purrr, tidygraph
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1

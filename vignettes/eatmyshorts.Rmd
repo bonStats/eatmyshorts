@@ -1,5 +1,5 @@
 ---
-title: "eatmyshorts"
+title: "Vignette for eatmyshorts"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{eatmyshorts}
@@ -10,39 +10,82 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  cache = T,
+  autodep = T
 )
-```
-
-```{r setup}
-library(eatmyshorts)
-library(BART)
 ```
 
 ## Boston Housing example (from `BART` vignette)
 
+First we fit the BART model on two variables (for simplicity). Note that we are only returning 5 trees from the 1000 post-burnin samples, and only using 10 trees in total.
 
 ```{r boston}
 
+suppressPackageStartupMessages({
+library(eatmyshorts)
 library(dplyr)
 library(ggplot2)
 library(BART)
+library(tidytree)
+})
 
 Boston <- MASS::Boston
 
 X <- Boston[, c(6, 13)]
 y <- Boston$medv
 
+set.seed(99)
 bart_model <- wbart(x.train = X, 
                   y.train = y, 
                   nskip = 1000, 
                   ndpost = 1000,
-                  nkeeptreedraws = 2) # keep only 2 mcmc iteration sum-of-trees
-
-simple_trees <- as_tidytree(bart_model)
-
-detailed_trees <- as_tidytree(bart_model, extra_cols = c("var", "cut", "leaf_value", "is_leaf"))
+                  nkeeptreedraws = 5, # keep only 5 mcmc iteration sum-of-trees
+                  ntree = 10, # use only 10 trees in each iteration (default 200)
+                  printevery = 1000
+                  ) 
 
 ```
 
+The current methods for extracting the trees from the `BART` models are summarise below.
+
+```{r tree-extract}
+# Current methods for extracting trees:
+
+tidytree_simple <- as_tidytree(bart_model)
+
+tidytree_simple
+
+tidytree_detailed <- as_tidytree(
+  bart_model, 
+  extra_cols = c("var", "cut", "leaf_value", "is_leaf")
+  )
+
+tidytree_detailed
+
+tidygraph_detailed <- as_tidygraph_list(
+  bart_model, 
+  extra_cols = c("var", "cut", "leaf_value", "is_leaf"))
+
+tidygraph_detailed[1:2]
+
+```
+```
+
+The `tidytree` method returns a `tbl_tree` (special `tibble`) grouped by MCMC iteration and tree number, whilst the `tidygraph` method returns a list of `tbl_graph` which inherit from the `igraph` structure.
+
+By using the `ggraph` and `tidygraph` package together, we can do some simple plotting.
+
+```{r boston-plot, fig.height=5, fig.width=5, cache = F}
+
+library(ggraph)
+
+  ggraph(tidygraph_detailed[[31]], 'dendrogram') + 
+    geom_edge_elbow() + 
+    geom_node_label(aes(label = label)) +
+    theme_graph()
+
+```
+
+This only plots 1 tree from 1 iteration of the BART MCMC. How do we extend it?
 

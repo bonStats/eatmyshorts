@@ -44,7 +44,7 @@ as_tidytree <- function(model, extra_cols, label_digits = 2){
     dplyr::one_of(keep_cols)
   )
 
-  class(out) <- c("tbl_tree", class(out))
+  class(out) <- c("grouped_df", "tbl_tree", "tbl_df", "tbl", "data.frame")
 
   return(out)
 }
