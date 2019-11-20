@@ -27,8 +27,6 @@ library(BART)
 library(dplyr)
 library(ggplot2)
 library(BART)
-library(tidybayes)
-library(tidytreatment)
 
 Boston <- MASS::Boston
 
@@ -39,12 +37,11 @@ bart_model <- wbart(x.train = X,
                   y.train = y, 
                   nskip = 1000, 
                   ndpost = 1000,
-                  nkeeptreedraws = 2) # only 2 trees
+                  nkeeptreedraws = 2) # keep only 2 mcmc iteration sum-of-trees
 
-trees <- get_posterior_trees(bart_model)
+simple_trees <- as_tidytree(bart_model)
 
-trees$trees %>% select(node, parent, label)
-
+detailed_trees <- as_tidytree(bart_model, extra_cols = c("var", "cut", "leaf_value", "is_leaf"))
 
 ```
 

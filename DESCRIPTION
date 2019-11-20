@@ -10,10 +10,9 @@ LazyData: true
 Suggests: 
     knitr,
     rmarkdown,
-    tidybayes,
-    tidytreatment,
     ggplot2,
-    MASS
+    MASS,
+    tidytree
 Depends: BART, dplyr, readr, purrr
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1

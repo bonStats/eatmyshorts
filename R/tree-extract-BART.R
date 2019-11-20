@@ -4,7 +4,7 @@ utils::globalVariables(c("node", "var", "leaf", "unique_tree_id", "iter", "tree_
 #'
 #' Tibble grouped by iteration (\code{iter}) and tree id (\code{tree_id}).
 #' All information calculated by method is included in output.
-#' See \code{posterior_tree_tbl} for more user-friendly method.
+#' See \code{as_tidytree} for more user-friendly method.
 #'
 #' @param model BART model.
 #' @param label_digits Rounding for labels.
