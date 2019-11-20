@@ -39,9 +39,12 @@ as_tidytree <- function(model, extra_cols, label_digits = 2){
     keep_cols <- unique(c(keep_cols, extra_cols))
   }
 
-  dplyr::select(
+  out <- dplyr::select(
     get_posterior_trees(model, label_digits = label_digits)$tree,
     dplyr::one_of(keep_cols)
   )
 
+  class(out) <- c("tbl_tree", class(out))
+
+  return(out)
 }
