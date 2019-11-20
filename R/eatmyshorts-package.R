@@ -7,7 +7,6 @@
 #' @importFrom readr read_table
 #' @importFrom purrr map_df map2
 #' @import dplyr
-#' @import BART
 #' @importFrom tidygraph tbl_graph
 #'
 NULL

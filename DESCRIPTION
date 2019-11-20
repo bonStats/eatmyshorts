@@ -7,13 +7,18 @@ Description: Visualisation methods and functions for exploring Bayesian Additive
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 3.5.0)
+Imports:  dplyr, 
+    readr, 
+    purrr, 
+    tidygraph
 Suggests: 
     knitr,
     rmarkdown,
     ggplot2,
     MASS,
     tidytree,
-    ggraph
-Depends: BART, dplyr, readr, purrr, tidygraph
+    ggraph,
+    BART
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
