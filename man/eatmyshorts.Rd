@@ -3,7 +3,6 @@
 \docType{package}
 \name{eatmyshorts}
 \alias{eatmyshorts}
-\alias{eatmyshorts-package}
 \title{eatmyshorts: Visualisation for BART models}
 \description{
 Visualisation methods and functions for exploring Bayesian Additive Regression Trees
