@@ -1,15 +1,15 @@
 utils::globalVariables(c("new_node", "new_parent"))
 
-#' Get posterior tree draws into \code{tbl_graph} format from \code{tidygraph} package.
+#' Get posterior tree draws into `tbl_graph` format from `tidygraph` package.
 #'
-#' Creates a list of \code{tbl_graph}'s. Each element of list corresponds to a particular MCMC iteration (\code{iter}) and tree id (\code{tree_id}).
-#' See \link[tidygraph]{tbl_graph} for details.
+#' Creates a list of `tbl_graph`'s. Each element of list corresponds to a particular MCMC iteration (`iter`) and tree id (`tree_id`).
+#' See [tbl_graph][tidygraph::tbl_graph] for details.
 #'
 #' @param model BART model.
 #' @param extra_cols Extra columns to be included.
 #' @param label_digits Rounding for labels.
 #'
-#' @return List of \code{tbl_graph}.
+#' @return List of `tbl_graph`.
 #'
 #' @export
 as_tidygraph_list <- function(model, extra_cols, label_digits = 2){

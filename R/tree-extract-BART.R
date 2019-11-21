@@ -2,23 +2,23 @@ utils::globalVariables(c("node", "var", "leaf", "unique_tree_id", "iter", "tree_
 
 #' Get posterior tree draws into tibble format
 #'
-#' Tibble grouped by iteration (\code{iter}) and tree id (\code{tree_id}).
+#' Tibble grouped by iteration (`iter`) and tree id (`tree_id`).
 #' All information calculated by method is included in output.
-#' See \code{as_tidytree} for more user-friendly method.
+#' See `as_tidytree` for more user-friendly method.
 #'
 #' @param model BART model.
 #' @param label_digits Rounding for labels.
 #'
 #' @return A tibble with columns to \describe{
 #'   \item{iter}{Integer describing unique MCMC iteration.}
-#'   \item{tree_id}{Integer. Unique tree id with each \code{iter}.}
-#'   \item{node}{Integer describing node in tree. Unique to each \code{tree}-\code{iter}.}
+#'   \item{tree_id}{Integer. Unique tree id with each `iter`.}
+#'   \item{node}{Integer describing node in tree. Unique to each `tree`-`iter`.}
 #'   \item{parent}{Integer describing parent node in tree.}
 #'   \item{label}{Label for the node.}
 #'   \item{tier}{Position in tree hierarchy.}
 #'   \item{var}{Variable for split.}
-#'   \item{cut}{Numeric. Value of decision rule for \code{var}.}
-#'   \item{is_leaf}{Logical. \code{TRUE} if leaf, \code{FALSE} if stem.}
+#'   \item{cut}{Numeric. Value of decision rule for `var`.}
+#'   \item{is_leaf}{Logical. `TRUE` if leaf, `FALSE` if stem.}
 #'   \item{leaf_value}{}
 #'   \item{child_left}{Integer. Left child of node.}
 #'   \item{child_right}{Integer. Right child of node.}
