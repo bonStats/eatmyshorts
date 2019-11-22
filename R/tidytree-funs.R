@@ -1,7 +1,7 @@
 #' Get posterior tree draws into `tbl_tree` format from `tidytree` package.
 #'
 #' Creates a `tbl_tree` grouped by iteration (`iter`) and tree id (`tree_id`).
-#' See Details below.
+#'   See Details below.
 #'
 #' @param model BART model.
 #' @param extra_cols Extra columns to be included.
@@ -9,8 +9,9 @@
 #'
 #' @return A tibble with required columns for `tbl_tree`:
 #'   `node`, `parent`, `label`.
-#'   And columns `iter`, `tree_id` are used to differentiate trees and iterations and are always included.
-#'   Remaining columns are optional (see details).
+#'   And columns `iter`, `tree_id` are used to differentiate trees and
+#'   iterations and are always included. Remaining columns are optional (see
+#'   details).
 #'
 #' @details List of potential columns returned:
 #'   \describe{

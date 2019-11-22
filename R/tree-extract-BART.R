@@ -1,8 +1,8 @@
 #' Get posterior tree draws into tibble format
 #'
-#' Tibble grouped by iteration (`iter`) and tree id (`tree_id`).
-#' All information calculated by method is included in output.
-#' See `as_tidytree` for more user-friendly method.
+#' Tibble grouped by iteration (`iter`) and tree id (`tree_id`). All information
+#'   calculated by method is included in output. See `as_tidytree` for more
+#'   user-friendly method.
 #'
 #' @param model BART model.
 #' @param label_digits Rounding for labels.

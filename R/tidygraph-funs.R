@@ -1,7 +1,8 @@
 #' Get posterior tree draws into `tbl_graph` format from `tidygraph` package.
 #'
-#' Creates a list of `tbl_graph`'s. Each element of list corresponds to a particular MCMC iteration (`iter`) and tree id (`tree_id`).
-#' See [tbl_graph][tidygraph::tbl_graph] for details.
+#' Creates a list of `tbl_graph`'s. Each element of list corresponds to a
+#'   particular MCMC iteration (`iter`) and tree id (`tree_id`). See
+#'   [tbl_graph][tidygraph::tbl_graph] for details.
 #'
 #' @param model BART model.
 #' @param extra_cols Extra columns to be included.
