@@ -30,11 +30,10 @@
 #'
 #' @export
 #'
-as_tidytree <- function(model, extra_cols, label_digits = 2){
-
+as_tidytree <- function(model, extra_cols, label_digits = 2) {
   keep_cols <- c("iter", "tree_id", "node", "parent", "label")
 
-  if(!missing(extra_cols)){
+  if (!missing(extra_cols)) {
     stopifnot(is.character(extra_cols))
     keep_cols <- unique(c(keep_cols, extra_cols))
   }

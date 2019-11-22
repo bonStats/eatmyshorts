@@ -26,21 +26,18 @@ utils::globalVariables(c("node", "var", "leaf", "unique_tree_id", "iter", "tree_
 #'
 #' @export
 #'
-get_posterior_trees <- function(model, label_digits = 2){
-
+get_posterior_trees <- function(model, label_digits = 2) {
   UseMethod("get_posterior_trees")
-
 }
 
-posterior_trees_BART <- function(model, label_digits){
-
+posterior_trees_BART <- function(model, label_digits) {
   var_names <- names(model$treedraws$cutpoints)
 
   cut_points_tb <- purrr::map_df(
     model$treedraws$cutpoints,
     ~ dplyr::tibble(cut = ., cut_id = 1:length(.)),
     .id =  "var"
-    )
+  )
 
   out <- list()
 
@@ -51,21 +48,21 @@ posterior_trees_BART <- function(model, label_digits){
   out$n_var <- as.integer(fline[3])
 
   out$trees <- suppressWarnings(
-      readr::read_table2(
-        file = model$treedraws$trees,
-        col_names = c("node", "var", "cut", "leaf"),
-        col_types =
-          readr::cols(
-            node = readr::col_integer(),
-            var = readr::col_integer(),
-            cut = readr::col_integer(),
-            leaf = readr::col_double()
-          ),
-        skip = 1,
-        na = c(""),
-        progress = F
-      )
+    readr::read_table2(
+      file = model$treedraws$trees,
+      col_names = c("node", "var", "cut", "leaf"),
+      col_types =
+        readr::cols(
+          node = readr::col_integer(),
+          var = readr::col_integer(),
+          cut = readr::col_integer(),
+          leaf = readr::col_double()
+        ),
+      skip = 1,
+      na = c(""),
+      progress = F
     )
+  )
 
   # indexing and tier
   out$trees <- dplyr::mutate(
@@ -76,7 +73,7 @@ posterior_trees_BART <- function(model, label_digits){
   )
 
   # define tree id and mcmc iteration number
-  out$trees <-  dplyr::mutate(
+  out$trees <- dplyr::mutate(
     out$trees,
     unique_tree_id = cumsum(is.na(var) & is.na(cut) & is.na(leaf)),
     iter = (unique_tree_id - 1L) %/% out$n_tree + 1L,
@@ -89,10 +86,10 @@ posterior_trees_BART <- function(model, label_digits){
 
   # add cut information
   out$trees <- dplyr::left_join(
-    dplyr::select(out$trees,-cut),
+    dplyr::select(out$trees, -cut),
     cut_points_tb,
     by = c("var", "cut_id")
-    )
+  )
 
   # add children information
   out$trees <- dplyr::group_by(out$trees, iter, tree_id)
@@ -100,7 +97,7 @@ posterior_trees_BART <- function(model, label_digits){
     out$trees,
     child_left = child_left(node),
     child_right = child_right(node)
-    )
+  )
 
   # remove leaf info if no children
   out$trees <- dplyr::mutate(
@@ -113,9 +110,9 @@ posterior_trees_BART <- function(model, label_digits){
       is_leaf,
       as.character(round(leaf_value, digits = label_digits)),
       paste(var, "<", round(cut, digits = label_digits))
-      ),
+    ),
     parent = parent(node)
-    )
+  )
 
   # regroup
   out$trees <- select(
@@ -135,69 +132,54 @@ posterior_trees_BART <- function(model, label_digits){
   )
 
   return(out)
-
 }
 
 #' @export
-get_posterior_trees.wbart <- function(model, label_digits = 2){
-
+get_posterior_trees.wbart <- function(model, label_digits = 2) {
   posterior_trees_BART(model, label_digits = label_digits)
-
 }
 
 #' @export
-get_posterior_trees.pbart <- function(model, label_digits = 2){
-
+get_posterior_trees.pbart <- function(model, label_digits = 2) {
   posterior_trees_BART(model, label_digits = label_digits)
-
 }
 
 #' @export
-get_posterior_trees.lbart <- function(model, label_digits = 2){
-
+get_posterior_trees.lbart <- function(model, label_digits = 2) {
   posterior_trees_BART(model, label_digits = label_digits)
-
 }
 
 #' @export
-get_posterior_trees.mbart <- function(model, label_digits = 2){
-
+get_posterior_trees.mbart <- function(model, label_digits = 2) {
   posterior_trees_BART(model, label_digits = label_digits)
-
 }
 
 #' @export
-get_posterior_trees.mbart2 <-function(model, label_digits = 2){
-
+get_posterior_trees.mbart2 <- function(model, label_digits = 2) {
   posterior_trees_BART(model, label_digits = label_digits)
-
 }
 
-child_left <- function(nodes){
+child_left <- function(nodes) {
 
   # must be grouped by iter and tree to apply
-  pot_child <- nodes*2L
+  pot_child <- nodes * 2L
   pot_child[!pot_child %in% nodes] <- NA_integer_
 
   return(pot_child)
-
 }
 
-child_right <- function(nodes){
+child_right <- function(nodes) {
 
   # must be grouped by iter and tree to apply
-  pot_child <- nodes*2L + 1L
+  pot_child <- nodes * 2L + 1L
   pot_child[!pot_child %in% nodes] <- NA_integer_
 
   return(pot_child)
-
 }
 
-parent <- function(nodes){
-
+parent <- function(nodes) {
   parents <- nodes %/% 2L
   parents[parents == 0L] <- NA_integer_
 
   return(parents)
-
 }
