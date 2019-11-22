@@ -28,7 +28,7 @@ A tibble with columns to \describe{
 }
 }
 \description{
-Tibble grouped by iteration (\code{iter}) and tree id (\code{tree_id}).
-All information calculated by method is included in output.
-See \code{as_tidytree} for more user-friendly method.
+Tibble grouped by iteration (\code{iter}) and tree id (\code{tree_id}). All information
+calculated by method is included in output. See \code{as_tidytree} for more
+user-friendly method.
 }
