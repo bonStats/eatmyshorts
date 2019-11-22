@@ -1,5 +1,3 @@
-utils::globalVariables(c("node", "var", "leaf", "unique_tree_id", "iter", "tree_id", "is_leaf", "label", "leaf_value", "tier"))
-
 #' Get posterior tree draws into tibble format
 #'
 #' Tibble grouped by iteration (`iter`) and tree id (`tree_id`).

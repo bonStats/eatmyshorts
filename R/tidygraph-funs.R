@@ -1,5 +1,3 @@
-utils::globalVariables(c("new_node", "new_parent"))
-
 #' Get posterior tree draws into `tbl_graph` format from `tidygraph` package.
 #'
 #' Creates a list of `tbl_graph`'s. Each element of list corresponds to a particular MCMC iteration (`iter`) and tree id (`tree_id`).
