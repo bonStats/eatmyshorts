@@ -25,7 +25,7 @@ as_tidygraph_list <- function(model, extra_cols, label_digits = 2) {
   )
 
   # reorder
-  res <- dplyr::select(res, -iter, -tree_id, everything())
+  res <- dplyr::select(res, -iter, -tree_id, dplyr::everything())
 
   # new sequential id for nodes (1,2,3...)
   res <- dplyr::mutate(res,
@@ -36,10 +36,14 @@ as_tidygraph_list <- function(model, extra_cols, label_digits = 2) {
   )
   res <- dplyr::select(res, -new_node, -new_parent)
 
-  node_list <- dplyr::group_split(select(res, -parent), keep = T)
+  node_list <- dplyr::group_split(dplyr::select(res, -parent), keep = T)
   edge_list <- purrr::map(dplyr::group_split(dplyr::select(res, iter, tree_id, parent, node), keep = F), ~ dplyr::filter(., !is.na(parent)))
 
-  tbl_graph_list <- purrr::map2(node_list, edge_list, ~ tidygraph::tbl_graph(nodes = .x, edges = .y, directed = T))
+  tbl_graph_list <- purrr::map2(.x = node_list,
+                                .y = edge_list,
+                                .f = ~tidygraph::tbl_graph(nodes = .x,
+                                                           edges = .y,
+                                                           directed = T))
 
   return(tbl_graph_list)
 }

@@ -16,8 +16,9 @@ as_tidytree(model, extra_cols, label_digits = 2)
 \value{
 A tibble with required columns for \code{tbl_tree}:
 \code{node}, \code{parent}, \code{label}.
-And columns \code{iter}, \code{tree_id} are used to differentiate trees and iterations and are always included.
-Remaining columns are optional (see details).
+And columns \code{iter}, \code{tree_id} are used to differentiate trees and
+iterations and are always included. Remaining columns are optional (see
+details).
 }
 \description{
 Creates a \code{tbl_tree} grouped by iteration (\code{iter}) and tree id (\code{tree_id}).

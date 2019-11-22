@@ -5,5 +5,6 @@
 \alias{eatmyshorts}
 \title{eatmyshorts: Visualisation for BART models}
 \description{
-Visualisation methods and functions for exploring Bayesian Additive Regression Trees
+Visualisation methods and functions for exploring Bayesian Additive
+Regression Trees
 }

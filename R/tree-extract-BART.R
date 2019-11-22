@@ -32,15 +32,17 @@ posterior_trees_BART <- function(model, label_digits) {
   var_names <- names(model$treedraws$cutpoints)
 
   cut_points_tb <- purrr::map_df(
-    model$treedraws$cutpoints,
-    ~ dplyr::tibble(cut = ., cut_id = 1:length(.)),
+    .x = model$treedraws$cutpoints,
+    .f = ~dplyr::tibble(cut = ., cut_id = 1:length(.)),
     .id =  "var"
   )
 
   out <- list()
 
   # first line contains mcmc draws
-  fline <- strsplit(readr::read_lines(file = model$treedraws$trees, n_max = 1), " ")[[1]]
+  fline <- strsplit(readr::read_lines(file = model$treedraws$trees,
+                                      n_max = 1),
+                    " ")[[1]]
   out$n_mcmc <- as.integer(fline[1])
   out$n_tree <- as.integer(fline[2])
   out$n_var <- as.integer(fline[3])
@@ -113,7 +115,7 @@ posterior_trees_BART <- function(model, label_digits) {
   )
 
   # regroup
-  out$trees <- select(
+  out$trees <- dplyr::select(
     dplyr::group_by(out$trees, iter, tree_id),
     iter,
     tree_id,
