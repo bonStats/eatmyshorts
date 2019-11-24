@@ -12,6 +12,7 @@ utils::globalVariables(c("new_node", "new_parent"))
 #' @return List of \code{tbl_graph}.
 #'
 #' @export
+#'
 as_tidygraph_list <- function(model, extra_cols, label_digits = 2){
 
   keep_cols <- c("iter", "tree_id", "node", "parent", "label")
