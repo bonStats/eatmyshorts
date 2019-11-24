@@ -3,7 +3,12 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  echo = T,
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-"
+  )
 ```
 
 ```{r print-comment, results='asis', echo = FALSE}

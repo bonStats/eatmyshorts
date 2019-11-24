@@ -17,6 +17,7 @@ as_tidygraph_list(model, extra_cols, label_digits = 2)
 List of \code{tbl_graph}.
 }
 \description{
-Creates a list of \code{tbl_graph}'s. Each element of list corresponds to a particular MCMC iteration (\code{iter}) and tree id (\code{tree_id}).
-See \link[tidygraph]{tbl_graph} for details.
+Creates a list of \code{tbl_graph}'s. Each element of list corresponds to a
+particular MCMC iteration (\code{iter}) and tree id (\code{tree_id}). See
+\link[tidygraph:tbl_graph]{tbl_graph} for details.
 }

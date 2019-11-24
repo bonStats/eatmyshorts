@@ -3,4 +3,5 @@ inst/doc
 .Rhistory
 doc
 Meta
-*_cache
+*_cache/
+/cache/
