@@ -7,7 +7,7 @@ Visualisation methods and functions for exploring Bayesian Additive Regression T
 
 This package is currently under development. Slides from OzViz 2019 workshop on `eatmyshorts` are available [here](https://bonstats.github.io/ozviz2019/slides.html).
 
-The first occurrence of the famous "eat my shorts" catch phrase was in S01E02 of The Simpsons. In this episode Edna Krabappel also says "visualise it BART" when Bart is having problems with a aptitude test. [This clip](https://youtu.be/6Jq_9ghf-jI) from the episode summarises how I sometimes feel about visualising BART models.
+The first occurrence of the famous "eat my shorts" catch phrase was in S01E02 of The Simpsons. In this episode Edna Krabappel also says "visualise it BART" when Bart is having problems with an aptitude test. [This clip](https://youtu.be/6Jq_9ghf-jI) from the episode summarises how I sometimes feel about visualising BART models.
 
 Example usage of package
 ========================
